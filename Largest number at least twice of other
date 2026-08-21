@@ -1,0 +1,28 @@
+int dominantIndex(int* nums, int numsSize)
+{
+    int i;
+    int max;
+    int second_max;
+    int index;
+
+    i = 0;
+    max = 0;
+    second_max = 0;
+    if (numsSize == 1)
+        return (nums[0]);
+    while (i < numsSize)
+    {
+        if (nums[i] > max && nums[i] > second_max)
+        {
+            second_max = max;
+            max = nums[i];
+            index = i;
+        }
+        if (nums[i] != max && nums[i] > second_max)
+            second_max = nums[i];
+        i++;
+    }
+    if ((second_max << 1) <= max)
+        return (index);
+    return (-1);
+}
