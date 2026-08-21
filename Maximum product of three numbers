@@ -1,0 +1,14 @@
+int sort(const void*a,const void*b){
+    return (*(int*)a-*(int*)b);
+}
+int maximumProduct(int* nums, int size) {
+
+    int prodMax=1,prodMin=1;
+    qsort(nums,size,4,sort);
+
+    if(size==3) return nums[0] * nums[1] * nums[2];
+    prodMin = nums[0] * nums[1] * nums[size-1];
+    prodMax = nums[size-3] * nums[size-2] * nums[size-1];
+
+    return prodMax>prodMin ? prodMax : prodMin;
+}
