@@ -1,0 +1,18 @@
+int* findErrorNums(int* nums, int N, int* returnSize) 
+{
+    bool* seen = ( bool* ) calloc( N+1, sizeof(bool) );
+    int cur_sum = 0, duplicate;
+    
+    for ( int i=0; i < N; i++ ) {
+        if ( seen[ nums[i] ] ) duplicate = nums[i];
+        seen[ nums[i] ] = true;
+        cur_sum += nums[i];
+    }
+    int original_sum = ( (N) * (N+1) ) / 2;
+    int missing_num  = original_sum - cur_sum + duplicate;
+
+    *returnSize = 2;
+    int* res = (int*) malloc( *returnSize * sizeof(int)  );
+    res[0] = duplicate; res[1] = missing_num;
+    return res;
+}
