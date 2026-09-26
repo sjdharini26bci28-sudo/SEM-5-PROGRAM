@@ -1,0 +1,34 @@
+char* reversePrefix(char* word, char ch) {
+    int i;
+    int count;
+    int stop;
+    char swap;
+
+    stop = 0;
+    count = 0;
+    i = 0;
+    while (word[i] != ch && word[i] != '\0')
+    {
+        count++;
+        i++;
+    }
+    if (word[0] == ch || word[i] == '\0')
+        return word;
+
+    count++;
+    stop = count;
+    stop /= 2;
+    count--;
+    i = 0;
+
+    while (stop)
+    {
+        swap = word[i];
+        word[i] = word[count];
+        word[count] = swap;
+        i++;
+        count--;
+        stop--;
+    }
+    return word;
+}
