@@ -1,0 +1,29 @@
+int minLength(char * s)
+{
+    char arr[101] = " ";
+    int slen = strlen(s);
+    int i = 0;
+    int j = 0;
+    int c = 0;
+    while (s[i] != '\0')
+    {
+        if (s[i] == 'A' || s[i] == 'C') 
+        {
+            arr[j++] = s[i];
+        }
+        else if (j > 0 && (s[i] == 'B' && arr[j - 1] == 'A' || s[i] == 'D' && arr[j - 1] == 'C'))
+        {
+            j--;
+            arr[j] = ' ';
+            c++;
+        }
+        else
+        {
+            j = 0;
+            arr[j] = ' ';
+        }
+        if (j < 0) j = 0;
+        i++;
+    }
+    return slen - (2*c);
+}
