@@ -1,0 +1,27 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* getSubarrayBeauty(int* nums, int numsSize, int k, int x, int* returnSize){
+    int *map=calloc(51,sizeof(int));
+    int *res=malloc(sizeof(int)*(numsSize-k+1));
+    *returnSize=numsSize-k+1;
+    int size=0;
+    for(int i=0;i<numsSize;i++){
+        if(nums[i]<0){
+            map[nums[i]+50]++;
+        }
+        if(i-k>=0 && nums[i-k]<0){
+            map[nums[i-k]+50]--;
+        }
+        if(i>=k-1){
+            int idx=0,ith=0;
+            for(;idx<50;idx++){
+                ith+=map[idx];
+                if(ith>=x) break;
+            }
+            res[i-k+1]=idx<50?idx-50:0;
+        }
+    }
+    free(map);
+    return res;
+}
